@@ -1,3 +1,6 @@
+import React from "react";
+import Link from "next/link";
+import LinkButton from "./components/LinkButton"
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -18,11 +21,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-gray-50">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+       {children}
       </body>
     </html>
   );
