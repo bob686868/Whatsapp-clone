@@ -12,7 +12,7 @@ const layout = async ({ children }) => {
   id=id.value
   return (
     <>
-      <nav className="flex justify-between p-4 bg-blue-200">
+      <nav className="flex justify-between p-4 bg-blue-200 border-b-3 border-gray-200">
         <span className="flex items-center text-blue-500 font-bold text-xl">
           Whatsapp Clone
         </span>
@@ -20,8 +20,8 @@ const layout = async ({ children }) => {
               <button type="submit" className={`rounded-sm w-[30vw] text-white p-2 text-center bg-blue-500 hover:bg-blue-400 cursor-pointer`}>Log Out</button>
             </form>
       </nav>
-      <div>
-        <div>{children}</div>
+      <div className="overflow-y-hidden h-[90vh]">
+        <div className="lg:mx-10">{children}</div>
         <nav className="flex justify-around fixed bottom-0 left-0 w-full bg-blue-200">
           <LinkButton href="/home">Home</LinkButton>
           <LinkButton href="/contacts">contacts</LinkButton>

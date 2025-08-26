@@ -1,7 +1,7 @@
 "use client"
 import React from 'react'
 
-const SearchBar = ({query,setQuery}) => {
+const SearchBar = ({query,setQuery,setHasFinished}) => {
   return (
     <>
         <label htmlFor="name" className="block">
@@ -15,7 +15,10 @@ const SearchBar = ({query,setQuery}) => {
           className="mb-3 rounded-sm p-2 focus:outline-none  border border-gray-200"
           required
           value={query}
-          onChange={(e)=>setQuery(e.target.value)}
+          onChange={(e)=>{
+            setHasFinished(false)
+            setQuery(e.target.value)
+          }}
         />
     </>
   )

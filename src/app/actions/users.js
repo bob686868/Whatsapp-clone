@@ -1,6 +1,8 @@
 "use server"
+import { revalidatePath } from 'next/cache.js'
 import prisma from './prisma.js'
 import { cookies } from "next/headers"
+import { redirect } from 'next/navigation'
 
 
 export async function signupUser(name,phoneNumber){
@@ -26,21 +28,22 @@ export async function signupUser(name,phoneNumber){
 }
 export async function logOutUser(){
     let cookieStore=await cookies()
-    let id=cookieStore.get('id').value
-    id=Number(id)
+    // if(!cookieStore.get('id'))redirect('/signup')
     try{
           cookieStore.set({
             name: "id",      
             value: "",     
             maxAge: 0         
         });
-        return {user,
-                status:200}
+     
+        // return {user,
+        //         status:200}
     }
     catch(e){
         return {message:"error happened while logging you out",
                 status:500}
     }
+    redirect('/signup')
 }
 
 export async function getAllUsers(){

@@ -61,7 +61,7 @@ export async function addMessage(content, contactId) {
       if (!room) {
         return { status: 404, error: "Room not found" };
       }
-      
+      console.log(room)
       await prisma.message.create({
         data: {
           content,

@@ -50,36 +50,38 @@ const MessageClient = ({ messages, id, contactId, users }) => {
   const getContactName = () =>
     users && users.filter((m) => m.id == contactId)[0].name;
   return (
-    <div className="min-h-full flex flex-col justify-between">
-      <div>
-        <Header contactId={contactId} name={getContactName()}></Header>
-        {optimisticMessages ? (
-          optimisticMessages.map((m) => (
-            <div key={m.id} className="mb-2">
-              <div
-                className={`px-4 py-1 max-w-[70%] w-fit rounded-md ${extraStyles(
-                  m.senderId
-                )}`}
-              >
-                <p>{m.content}</p>
-              </div>
-              {m.senderId == id && (
-                <DeleteButton
-                  messageId={m.id}
-                  contactId={contactId}
-                  setOptimisticMessages={setOptimisticMessages}
-                />
-              )}
-            </div>
-          ))
-        ) : (
-          <div>No messages available</div>
-        )}
-      </div>
+    <div className="min-h-[90vh] flex flex-col overflow-y-hidden ">
+      <Header contactId={contactId} name={getContactName()}></Header>
 
+      <div className="flex flex-col min-h-[68.5vh] max-h-[68.5vh] mt-2">
+        <section className="flex-1 overflow-y-auto min-h-full">
+          {optimisticMessages ? (
+            optimisticMessages.map((m) => (
+              <div key={m.id} className="mb-2">
+                <div
+                  className={`px-4 py-1 max-w-[70%] w-fit rounded-md ${extraStyles(
+                    m.senderId
+                  )}`}
+                >
+                  <p>{m.content}</p>
+                </div>
+                {m.senderId == id && (
+                  <DeleteButton
+                    messageId={m.id}
+                    contactId={contactId}
+                    setOptimisticMessages={setOptimisticMessages}
+                  />
+                )}
+              </div>
+            ))
+          ) : (
+            <div>No messages available</div>
+          )}
+        </section>
+      </div>
       <form
         onSubmit={addHandler}
-        className="bg-blue-200 fixed bottom-10 left-4/12 right-0 border-b-2 border-b-gray-200 flex"
+        className="bg-blue-200 border-b-2 border-b-gray-200 flex"
       >
         <input
           type="text"

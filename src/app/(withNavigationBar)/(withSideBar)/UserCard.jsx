@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 const UserCard = ({content,isSender,contactName,id1,id2}) => {
-  if(content && content.length>20)content=content.slice(0,20)+"..."
+  if(content && content.length>10)content=content.slice(0,10)+"..."
   let pathName=usePathname()
   let extraStyles="";
   if(pathName==`/room/${id1}/${id2}` || pathName==`/room/${id1}/${id2}`){

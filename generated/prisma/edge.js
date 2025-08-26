@@ -86,6 +86,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -114,6 +117,16 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.UserOrderByRelevanceFieldEnum = {
+  name: 'name',
+  phoneNumber: 'phoneNumber',
+  bio: 'bio'
+};
+
+exports.Prisma.MessageOrderByRelevanceFieldEnum = {
+  content: 'content'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -131,7 +144,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\OMEN\\OneDrive\\Desktop\\Projects\\Whatsapp\\whatsapp\\generated\\prisma",
+      "value": "C:\\Users\\OMEN\\OneDrive\\Desktop\\WhatsappClone\\Whatsapp-clone\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -145,7 +158,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\OMEN\\OneDrive\\Desktop\\Projects\\Whatsapp\\whatsapp\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\OMEN\\OneDrive\\Desktop\\WhatsappClone\\Whatsapp-clone\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -158,8 +171,7 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
-  "postinstall": false,
+  "activeProvider": "mysql",
   "inlineDatasources": {
     "db": {
       "url": {
@@ -168,8 +180,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          Int       @id @default(autoincrement())\n  name        String\n  phoneNumber String    @unique\n  bio         String    @default(\"This user has no bio\")\n  rooms       Room[]    @relation(\"RoomMembers\")\n  contacts    User[]    @relation(\"UserContacts\")\n  contactedBy User[]    @relation(\"UserContacts\")\n  messages    Message[]\n}\n\nmodel Room {\n  id Int @id @default(autoincrement())\n\n  messages  Message[]\n  users     User[]    @relation(\"RoomMembers\")\n  updatedAt DateTime  @updatedAt\n}\n\nmodel Message {\n  id        Int      @id @default(autoincrement())\n  content   String\n  createdAt DateTime @default(now())\n\n  sender   User @relation(fields: [senderId], references: [id])\n  senderId Int\n  room     Room @relation(fields: [roomId], references: [id])\n  roomId   Int\n}\n",
-  "inlineSchemaHash": "d769cfe1e88b2785d7db9f43ad1a0304c5540ba62e74b37527f4e18c057adbcb",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id          Int       @id @default(autoincrement())\n  name        String\n  phoneNumber String    @unique\n  bio         String    @default(\"This user has no bio\")\n  rooms       Room[]    @relation(\"RoomMembers\")\n  contacts    User[]    @relation(\"UserContacts\")\n  contactedBy User[]    @relation(\"UserContacts\")\n  messages    Message[]\n}\n\nmodel Room {\n  id Int @id @default(autoincrement())\n\n  messages  Message[]\n  users     User[]    @relation(\"RoomMembers\")\n  updatedAt DateTime  @updatedAt\n}\n\nmodel Message {\n  id        Int      @id @default(autoincrement())\n  content   String\n  createdAt DateTime @default(now())\n\n  sender   User @relation(fields: [senderId], references: [id])\n  senderId Int\n  room     Room @relation(fields: [roomId], references: [id])\n  roomId   Int\n}\n",
+  "inlineSchemaHash": "42273bd1f5ab63ba55dcb1df805fa502957eaf41bc5bfa514f67eda39fe33dd2",
   "copyEngine": true
 }
 config.dirname = '/'
