@@ -28,14 +28,25 @@ const MessageClient = ({ messages, id, contactId, users }) => {
   function optimisticHandler(prevMessages, action) {
     switch (action.type) {
       case "add":
-        return [
-          ...prevMessages,
-          {
-            id: `temp-${Date.now()}`,
-            content: action.content,
-            senderId: action.senderId,
-          },
-        ];
+        if(prevMessages.length>0){
+          return [
+            ...prevMessages,
+            {
+              id: `temp-${Date.now()}`,
+              content: action.content,
+              senderId: action.senderId,
+            },
+          ];
+        }
+        else{
+          return [
+            {
+              id: `temp-${Date.now()}`,
+              content: action.content,
+              senderId: action.senderId,
+            },
+          ];
+        }
       case "delete":
         return prevMessages.filter((m) => m.id !== action.id);
       default:
