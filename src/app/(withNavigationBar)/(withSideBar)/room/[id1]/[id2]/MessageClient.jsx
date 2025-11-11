@@ -28,7 +28,7 @@ const MessageClient = ({ messages, id, contactId, users }) => {
   function optimisticHandler(prevMessages, action) {
     switch (action.type) {
       case "add":
-        if(prevMessages.length>0){
+        if (prevMessages.length > 0) {
           return [
             ...prevMessages,
             {
@@ -37,8 +37,7 @@ const MessageClient = ({ messages, id, contactId, users }) => {
               senderId: action.senderId,
             },
           ];
-        }
-        else{
+        } else {
           return [
             {
               id: `temp-${Date.now()}`,
